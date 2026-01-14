@@ -10,26 +10,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # -----------------------------
-      # Step 1
-      # -----------------------------
-      - name: Step 1 - Preparation
+      # -------------------------------------------------
+      # Step 1 - Acknowledge dispatch (IMPORTANT)
+      # -------------------------------------------------
+      - name: Step 1 - Acknowledge repository_dispatch
         run: |
-          echo "Repo-B Step 1"
-          echo "Triggered by: ${{ github.event.client_payload.triggered_by }}"
-          echo "Environment: ${{ github.event.client_payload.env }}"
+          echo "Repo-B triggered via repository_dispatch"
+          echo "Correlation ID: ${{ github.event.client_payload.correlation_id }}"
 
-      # -----------------------------
-      # Step 2
-      # -----------------------------
+      # -------------------------------------------------
+      # Step 2 - Main processing step
+      # -------------------------------------------------
       - name: Step 2 - Main processing
         run: |
           echo "Repo-B Step 2 running"
+          echo "Doing some work..."
           sleep 10
 
-      # -----------------------------
-      # Step 3
-      # -----------------------------
-      - name: Step 3 - Finalization
+      # -------------------------------------------------
+      # Step 3 - Finalization
+      # -------------------------------------------------
+      - name: Step 3 - Final step
         run: |
-          echo "Repo-B Step 3 completed"
+          echo "Repo-B Step 3 completed successfully"
