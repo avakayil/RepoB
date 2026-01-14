@@ -1,0 +1,35 @@
+name: Repo-B Automated Workflow
+
+on:
+  repository_dispatch:
+    types:
+      - trigger-from-repo-a
+
+jobs:
+  repo-b-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      # -----------------------------
+      # Step 1
+      # -----------------------------
+      - name: Step 1 - Preparation
+        run: |
+          echo "Repo-B Step 1"
+          echo "Triggered by: ${{ github.event.client_payload.triggered_by }}"
+          echo "Environment: ${{ github.event.client_payload.env }}"
+
+      # -----------------------------
+      # Step 2
+      # -----------------------------
+      - name: Step 2 - Main processing
+        run: |
+          echo "Repo-B Step 2 running"
+          sleep 10
+
+      # -----------------------------
+      # Step 3
+      # -----------------------------
+      - name: Step 3 - Finalization
+        run: |
+          echo "Repo-B Step 3 completed"
